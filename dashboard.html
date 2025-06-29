@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Exam Dashboard</h2>
+        <a href="/dashboard">Seating Planner</a>
+        <a href="#">Upload (Coming)</a>
+        <a href="#">Export (Coming)</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Seating Arrangement Generator</h1>
+        <form method="POST">
+            <label>Enter Student Data (Roll, Name, Branch, Subject):</label><br>
+            <textarea name="students" placeholder="CS101, Alice, CSE, Maths&#10;ME201, Bob, ME, Physics"></textarea><br>
+            <input type="submit" value="Generate Arrangement">
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Seating Arrangement</h2>
+            {% for room, layout in result.items() %}
+                <h3>{{ room }}</h3>
+                <table>
+                    {% for row in layout %}
+                        <tr>
+                            {% for seat in row %}
+                                <td>{{ seat }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
